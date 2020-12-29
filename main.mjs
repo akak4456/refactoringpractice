@@ -1,5 +1,5 @@
 import fs from 'fs';
-import statement from './statement.mjs';
+import {statement,htmlStatement} from './statement.mjs';
 fs.readFile('plays.json',(err,data)=>{
     if(err) throw err;
     let plays;
@@ -9,5 +9,6 @@ fs.readFile('plays.json',(err,data)=>{
         if(err) throw err;
         invoices = JSON.parse(data);
         console.log(statement(invoices[0],plays));
+        console.log(htmlStatement(invoices[0],plays))
     });
 });
