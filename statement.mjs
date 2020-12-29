@@ -1,9 +1,10 @@
 export default function statement(invoice,plays){
     const statementData = {};
+    statementData.customer = invoice.customer;
     return renderPlanText(statementData,invoice,plays);
 }
 function renderPlanText(data, invoice, plays) {
-    let result = `청구 내역 (고객명: ${invoice.customer})\n`;
+    let result = `청구 내역 (고객명: ${data.customer})\n`;
     for(let perf of invoice.performances){
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience}석)\n`;
     }
