@@ -1,4 +1,7 @@
-export default function statement(invoice, plays) {
+export default function statement(invoice,plays){
+    return renderPlanText(invoice,plays);
+}
+function renderPlanText(invoice, plays) {
     let result = `청구 내역 (고객명: ${invoice.customer})\n`;
     for(let perf of invoice.performances){
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience}석)\n`;
@@ -15,11 +18,11 @@ export default function statement(invoice, plays) {
         return result;
     }
     function totalVolumeCredits(){
-        let volumeCredits = 0;
+        let result = 0;
         for(let perf of invoice.performances){
-            volumeCredits += volumeCreditsFor(perf);
+            result += volumeCreditsFor(perf);
         }
-        return volumeCredits;
+        return result;
     }
     function usd(aNumber){
         return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2}).format(aNumber/100);
