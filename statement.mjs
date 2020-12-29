@@ -5,7 +5,7 @@ export default function statement(invoice, plays) {
     const format = new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2}).format;
 
     for(let perf of invoice.performances){
-        let thisAmount = amountFor(perf,playFor(perf));
+        let thisAmount = amountFor(perf);
         volumeCredits += Math.max(perf.audience-30,0);
         if("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience/5);
 
@@ -19,7 +19,7 @@ export default function statement(invoice, plays) {
     function playFor(aPerformance){
         return plays[aPerformance.playID];
     }
-    function amountFor(aPerformance,play){
+    function amountFor(aPerformance){
         let result = 0;
         switch(playFor(aPerformance).type){
             case "tragedy":
@@ -36,7 +36,7 @@ export default function statement(invoice, plays) {
                 result += 300 * aPerformance.audience;
                 break;
             default:
-                throw new Error(`알 수 없는 장르: ${play.type}`);
+                throw new Error(`알 수 없는 장르: ${playFor(aPerformance).type}`);
         }
         return result;
     }
