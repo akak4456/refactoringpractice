@@ -1,7 +1,7 @@
 export default class Producer{
     constructor(aProvince,data){
         this._province = aProvince;
-        this._cose = data.cost;
+        this._cost = data.cost;
         this._name = data.name;
         this._production = data.production || 0;
     }
